@@ -2,9 +2,15 @@
   "name": "redux-react-tutorial",
   "version": "1.0.0",
   "description": "Tutorial from https://www.valentinog.com/blog/redux/",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   },
   "keywords": [
     "redux",
@@ -12,8 +18,16 @@
   ],
   "author": "Mark Hsu",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
+    "react-dom": "^16.0.0",
     "react": "^16.8.6",
-    "redux": "^4.0.1"
-  }
+    "redux": "^4.0.1",
+    "react-scripts": "2.1.8"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
