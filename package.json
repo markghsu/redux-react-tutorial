@@ -1,0 +1,19 @@
+{
+  "name": "redux-react-tutorial",
+  "version": "1.0.0",
+  "description": "Tutorial from https://www.valentinog.com/blog/redux/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redux",
+    "react"
+  ],
+  "author": "Mark Hsu",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^16.8.6",
+    "redux": "^4.0.1"
+  }
+}
