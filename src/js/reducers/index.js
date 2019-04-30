@@ -8,7 +8,6 @@ const initialState = {
 //REDUCERS MUST BE PURE FUNCTIONS -- NO SIDE EFFECTS, NO NON-DETERMINISM
 //DO NOT AFFECT STATE IN PLACE -- MAKE COPIES AS NEEDED
 function rootReducer(state = initialState, action){
-	let nState = {};
 	if (action.type === ADD_ARTICLE) {
 		//DON'T MUTATE STATE
 		//USE OBJECT.ASSIGN TO CREATE NEW COPY
