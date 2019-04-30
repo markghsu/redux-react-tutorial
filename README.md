@@ -29,10 +29,16 @@ __To Run, use command `node ./node_modules/react-scripts/bin/react-scripts.js st
 - takes two argument functions: `mapStateToProps`,`mapDispatchToProps`
 - Also use __Provider__: wrapper for the entire application that gives it knowledge of the Redux Store.
 
+#### connect
+- curries `mapStateToProps`,`mapDispatchToProps` and then a component
+-`const myConnectedComponent = connect(mapStateToProps,mapDispatchToProps)(myComponent)`
+
 #### mapStateToProps
 - connects part of state in the store to props of a component so they will have exact access to the part of the store they need.
 - binds subscribe/getState so that the props of the component will change as the state changes, forcing react to redraw as needed.
+- function returns an obj where each property is a prop name, and the value is what it's accessing in the store
 
 #### mapDispatchToProps
 - connects actions that need to be dispatched to components, again through props
 - Component can then dispatch actions to Store.
+- mapDispatchToProps will be give the `dispatch` function of the Store. we need to take that, and for every prop we need, we list them in the return object. each prop will then map to a function that actually calls the dispatch with the correct action as needed.
