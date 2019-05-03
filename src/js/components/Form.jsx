@@ -13,6 +13,12 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
+function mapStateToProps(state) {
+	return {
+		error: state.error
+	}
+}
+
 class ConnectedForm extends Component {
 	constructor() {
 		super();
@@ -49,8 +55,10 @@ class ConnectedForm extends Component {
 
 	render() {
 		const { title } = this.state;
+		const error = (this.props.error)?(<div className="has-error"><span className="help-block">The following forbidden words were submitted: {this.props.error.toString()}</span></div>):"";
 		return (
 			<form onSubmit={this.handleSubmit}>
+				{error}
 				<div className="form-group">
 					<label htmlFor="title">Title</label>
 					<input 
@@ -69,6 +77,6 @@ class ConnectedForm extends Component {
 	}
 }
 
-const Form = connect(null,mapDispatchToProps)(ConnectedForm);
+const Form = connect(mapStateToProps,mapDispatchToProps)(ConnectedForm);
 
 export default Form;

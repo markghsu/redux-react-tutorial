@@ -16,7 +16,8 @@ function rootReducer(state = initialState, action){
 			//SHOULD USE concat(), slice(), ...spread for arrays
 			//Object.assign(), ...spread for objects
 			return Object.assign({}, state, {
-				articles: state.articles.concat(action.payload)
+				articles: state.articles.concat(action.payload),
+				error: null
 			});
 			//SAME AS:
 			/*
