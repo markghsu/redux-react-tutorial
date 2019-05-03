@@ -1,4 +1,4 @@
-import { ADD_ARTICLE } from '../constants/action-types';
+import { ADD_ARTICLE, FOUND_BAD_WORD } from '../constants/action-types';
 
 const initialState = {
 	articles: []
@@ -8,22 +8,30 @@ const initialState = {
 //REDUCERS MUST BE PURE FUNCTIONS -- NO SIDE EFFECTS, NO NON-DETERMINISM
 //DO NOT AFFECT STATE IN PLACE -- MAKE COPIES AS NEEDED
 function rootReducer(state = initialState, action){
-	if (action.type === ADD_ARTICLE) {
-		//DON'T MUTATE STATE
-		//USE OBJECT.ASSIGN TO CREATE NEW COPY
-		//THEN INSIDE STATE CONCAT OLD ARTICLES WITH NEW ARTICLES (I.E, the payload of the action)
-		//SHOULD USE concat(), slice(), ...spread for arrays
-		//Object.assign(), ...spread for objects
-		return Object.assign({}, state, {
-			articles: state.articles.concat(action.payload)
-		});
-		//SAME AS:
-		/*
-		return {
-			...state,
-			articles: state.articles.concat(action.payload)
-		}
-		*/
+	switch(action.type){
+		case ADD_ARTICLE:
+			//DON'T MUTATE STATE
+			//USE OBJECT.ASSIGN TO CREATE NEW COPY
+			//THEN INSIDE STATE CONCAT OLD ARTICLES WITH NEW ARTICLES (I.E, the payload of the action)
+			//SHOULD USE concat(), slice(), ...spread for arrays
+			//Object.assign(), ...spread for objects
+			return Object.assign({}, state, {
+				articles: state.articles.concat(action.payload)
+			});
+			//SAME AS:
+			/*
+			return {
+				...state,
+				articles: state.articles.concat(action.payload)
+			}
+			*/
+			break;
+		case FOUND_BAD_WORD:
+			return {
+				...state,
+				error: action.words.slice()
+			}
+			break;
 	}
 	return state; //RETURN OUR INITIAL STATE
 }

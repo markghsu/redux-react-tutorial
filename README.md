@@ -42,3 +42,10 @@ __To Run, use command `node ./node_modules/react-scripts/bin/react-scripts.js st
 - connects actions that need to be dispatched to components, again through props
 - Component can then dispatch actions to Store.
 - mapDispatchToProps will be give the `dispatch` function of the Store. we need to take that, and for every prop we need, we list them in the return object. each prop will then map to a function that actually calls the dispatch with the correct action as needed.
+
+### Middleware
+- Middleware allows us to do things with actions PRIOR to the reducer being called.
+- We can do data-validation, including dispatching different actions, changing data-flow, logging, etc.
+- We could have done this in our view layer (i.e., inside react), but that muddies our separation of concerns. We should instead do this inside of Redux.
+- Middlewares are reusable, testable in isolation
+- Middleware relies on Currying functions - we can then chain middleware calls together.
