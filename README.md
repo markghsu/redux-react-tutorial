@@ -39,9 +39,13 @@ __To Run, use command `node ./node_modules/react-scripts/bin/react-scripts.js st
 - function returns an obj where each property is a prop name, and the value is what it's accessing in the store
 
 #### mapDispatchToProps
-- connects actions that need to be dispatched to components, again through props
-- Component can then dispatch actions to Store.
+- By default, if we don't use mapDispatchToProps, our component will automatically get `this.props.dispatch`, which lets us dispatch actions from the component directly.
+- Connects actions that need to be dispatched to components, again through props, but DECLARATIVELY: `<button onClick={doSomething} />` is better than having button explicitly dispatch an action.
+- Once we have mapDispatch, we no longer get dispatch as a prop.
 - mapDispatchToProps will be give the `dispatch` function of the Store. we need to take that, and for every prop we need, we list them in the return object. each prop will then map to a function that actually calls the dispatch with the correct action as needed.
+- Two styles: function, and object shorthand.
+- function lets us define more stuff (pass args, interact with other props, etc.) can also use bindActionCreators to do boilerplate things.
+- 
 
 ### Middleware
 - Middleware allows us to do things with actions PRIOR to the reducer being called.

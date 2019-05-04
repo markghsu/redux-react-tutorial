@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addArticle } from '../actions/index'
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch/*optionally could get ownprops here*/) {
+	//FUNCTIONAL FORM OF mapDispatchToProps
+
 	//need to return an object
 	//where every property is the name of a prop in our component
 	//since this prop is a function
 	//we return a function that calls DISPATCH (which will be passed from `connect`)
 	//along with the action (created using our actionCreator from the action js folder)
+	//we want to explicitly state the param we need and forward that param to the action creator.
 	return {
-		addArticle: article => dispatch(addArticle(article))
+		addArticle: article => dispatch(addArticle(article))//by convention, name prop same as action creator
 	};
 }
 
