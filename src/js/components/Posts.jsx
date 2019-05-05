@@ -12,19 +12,24 @@ export class Post extends Component {
 		this.props.getData();
 	}
 	render(){
-		return (<ul className="list-group list-group-flush">
+		return (<div>{this.props.error && <div className="error">Error with api call: {this.props.error}</div>}
+			{this.props.loading?<div>Loading...</div>:(
+			<ul className="list-group list-group-flush">
 				{this.props.articles.map(article => (
 					<li className="list-group-item" key={article.id}>
 						{article.title}
 					</li>
 					))}
 				</ul>
-			);
+			)}
+		</div>);
 	}
 }
 
 function mapStateToProps(state){
 	return {
+		loading: state.loading,
+		error: state.webError,
 		articles: state.webArticles.slice(0,10)//get first 10 articles only.
 	}
 }

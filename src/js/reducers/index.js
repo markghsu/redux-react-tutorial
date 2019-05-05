@@ -1,4 +1,4 @@
-import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_LOADED } from '../constants/action-types';
+import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_LOADING_BEGIN, DATA_LOADING_SUCCESS, DATA_LOADING_FAILURE } from '../constants/action-types';
 
 const initialState = {
 	articles: [],
@@ -32,10 +32,23 @@ function rootReducer(state = initialState, action){
 				...state,
 				error: action.words.slice()
 			}
-		case DATA_LOADED:
+		case DATA_LOADING_BEGIN:
 			return {
 				...state,
+				loading: true
+			}
+		case DATA_LOADING_SUCCESS:
+			return {
+				...state,
+				loading: false,
 				webArticles: state.webArticles.concat(action.payload)
+			}
+		case DATA_LOADING_FAILURE:
+			return {
+				...state,
+				loading: false,
+				webArticles: [],
+				webError: action.error.toString()
 			}
 		default:
 			break;

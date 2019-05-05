@@ -8,7 +8,7 @@
 //THEY DEFINE SOMETHING PARAMETERS THAT A REDUCER CAN USE TO CHANGE STATE.
 //ACTION CREATORS ARE FUNCTIONS THAT CREATE ACTION. MAKE IT MORE MODULAR
 
-import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_LOADED } from '../constants/action-types';
+import { ADD_ARTICLE, FOUND_BAD_WORD, DATA_LOADING_SUCCESS, DATA_LOADING_BEGIN, DATA_LOADING_FAILURE } from '../constants/action-types';
 export function addArticle(payload){
 	return {
 		type:ADD_ARTICLE, //use constant to prevent typos
@@ -29,11 +29,30 @@ export function foundBadWord(words){
 export function getData() {
 	//THIS THUNK IS CALLED BY THE redux-thunk middleware
 	return function(dispatch) {
-		return fetch("https://jsonplaceholder.typicode.com/posts")
+		dispatch(dataStart());
+
+		return fetch("https://jsonplaceholder.typicode.c,om/posts")
 		.then(response => response.json())
 		.then(jsonresponse => {
 			//WE WANT TO CALL DISPATCH HERE, AS OUR ASYNC ACTION REQUIRES US TO DISPATCH A NEW ACTION ON RESOLUTION
-			dispatch({ type: DATA_LOADED, payload: jsonresponse });
-		});
+			dispatch(dataSuccess(jsonresponse));
+		}).catch(error => dispatch(dataFailure(error)));
+	}
+}
+export function dataStart() {
+	return {
+		type: DATA_LOADING_BEGIN
+	}
+}
+export function dataSuccess(response) {
+	return {
+		type: DATA_LOADING_SUCCESS,
+		payload: response
+	}
+}
+export function dataFailure(error) {
+	return {
+		type: DATA_LOADING_FAILURE,
+		error: error
 	}
 }
