@@ -39,6 +39,12 @@ export function getData() {
 		}).catch(error => dispatch(dataFailure(error)));
 	}
 }
+
+export function getSagaData(){
+	return {
+		type: "DATA_REQUESTED"
+	};
+}
 export function dataStart() {
 	return {
 		type: DATA_LOADING_BEGIN

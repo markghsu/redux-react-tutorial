@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getData } from '../actions/index'
+import { getSagaData } from '../actions/index'
 //getData is the name of the "action creator". This action creator will be passed dispatch
 //when it is connected via the mapDispatchToProps. Then inside the action creator
 //we make a 
@@ -9,7 +9,7 @@ export class Post extends Component {
 
 	//API CALLS GO IN componentDidMount
 	componentDidMount() {
-		this.props.getData();
+		this.props.getSagaData();
 	}
 	render(){
 		return (<div>{this.props.error && <div className="error">Error with api call: {this.props.error}</div>}
@@ -35,7 +35,7 @@ function mapStateToProps(state){
 }
 
 export default connect(
-	mapStateToProps, { getData }
+	mapStateToProps, { getSagaData }
 )(Post);
 //WE USE THE "Object shorthand form" of mapDispatch here
 //utilizes react-redux's bindActionCreators to automatically create the necessary bindings
