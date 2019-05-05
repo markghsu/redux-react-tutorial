@@ -53,3 +53,18 @@ __To Run, use command `node ./node_modules/react-scripts/bin/react-scripts.js st
 - We could have done this in our view layer (i.e., inside react), but that muddies our separation of concerns. We should instead do this inside of Redux.
 - Middlewares are reusable, testable in isolation
 - Middleware relies on Currying functions - we can then chain middleware calls together.
+
+#### redux-thunk
+- a __Thunk__ is a function that's wrapped in another function. e.g.
+````javascript
+function wrapper_function() {
+	return function thunk(){
+		console.log('do stuff now');
+	};
+}
+````
+This lets us pass the inner function around, delay execution, etc. to actually DO the thunk, we use: `wrapper_function()()`.
+- redux-thunk is a middleware that looks at every "action" passed to it, and if the action is actually a function instead of an action, it calls the function.
+- redux will pass `dispatch` and `getState` to each "thunk", so they can dispatch new actions and use getState as needed.
+- So our action creators can now pass a "thunk" which does some side effect type work - promises/async/api calls, which will then be executed by the middleware. Then, once the promise is completed we can dispatch our actual action.
+- Our api calls (using fetch) can be written as a set of 3 actions: 1. BEGIN (before API is called, this action will be thunked to call the API) 2. SUCCESS (after API promise successfully resolves) 3. FAILURE (after API promise resolves in error/failure).
